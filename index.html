@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PARKLY | Smart Parking OS</title>
+
+    <link rel="stylesheet" href="./parking-dashboard.css">
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-mark">↯</div>
+
+                <div>
+                    <strong>PARKLY</strong>
+                    <small>SMART PARKING OS</small>
+                </div>
+            </div>
+
+            <p class="eyebrow">Navegação</p>
+
+            <nav class="nav-list">
+
+                <a class="nav-link active" href="#dashboard">
+                    ⌁
+                    <span>Visão Geral</span>
+                    <b>●</b>
+                </a>
+
+                <a class="nav-link" href="#mapa">
+                    ⌖
+                    <span>Mapa em tempo real</span>
+                </a>
+
+                <a class="nav-link" href="#fluxo">
+                    ◌
+                    <span>Fluxo de veículos</span>
+                </a>
+
+                <a class="nav-link" href="#mensalistas">
+                    <span>Mensalistas</span>
+                </a>
+
+                <a class="nav-link" href="#preferencias">
+                    <span>Preferências</span>
+                </a>
+
+            </nav>
+
+            <!-- STATUS DO SERVIDOR -->
+
+            <div class="system-card">
+
+                <strong id="apiStatus">◉ Conectando ao servidor...</strong>
+
+                <div>
+                    <span>Latência média</span>
+                    <b>--</b>
+                </div>
+
+                <i>
+                    <em></em>
+                </i>
+
+            </div>
+
+            <!-- PERFIL -->
+
+            <div class="profile">
+
+                <div class="avatar">JR</div>
+
+                <div>
+                    <strong>Junior</strong>
+                    <small>Operador</small>
+                </div>
+
+                <span>•••</span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO PRINCIPAL -->
+
+        <main class="content" id="dashboard">
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <p class="eyebrow online">
+                        ● Sistema operacional
+                    </p>
+
+                    <h1>Visão Geral</h1>
+
+                </div>
+
+                <div class="top-actions">
+
+                    <span class="unit">
+                        Buscar Placa
+                    </span>
+
+                    <button aria-label="Buscar">
+                        ⌕
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- CORPO DA PÁGINA -->
+
+            <div class="page-body">
+
+                <!-- HERO -->
+
+                <div class="hero">
+
+                    <div>
+
+                        <h2>
+                            Olá, Junior
+                            <span>/</span>
+                            visão da operação
+                        </h2>
+
+                    </div>
+
+                    <div class="hero-actions">
+
+                        <button id="btnEntrada">
+                            ↓ Registrar entrada
+                        </button>
+
+                        <button class="primary" id="btnSaida">
+                            ↑ Registrar saída
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MÉTRICAS -->
+
+                <section class="metrics">
+
+                    <!-- LOTAÇÃO -->
+
+                    <article>
+
+                        <div>
+                            <span>LOTAÇÃO</span>
+
+                            <b class="metric-icon green">
+                                🛑
+                            </b>
+                        </div>
+
+                        <p id="ocupacaoValor">--%</p>
+
+                        <small id="ocupacaoDetalhe">
+                            Aguardando dados...
+                        </small>
+
+                    </article>
+
+
+                    <!-- VAGAS LIVRES -->
+
+                    <article>
+
+                        <div>
+                            <span>QUANTIDADE DE VAGAS LIVRES</span>
+
+                            <b class="metric-icon cyan">
+                                ✅
+                            </b>
+                        </div>
+
+                        <p id="vagasLivresValor">--</p>
+
+                        <small id="vagasLivresDetalhe">
+                            Capacidade total
+                        </small>
+
+                    </article>
+
+
+                    <!-- ENTRADAS -->
+
+                    <article>
+
+                        <div>
+                            <span>ENTRADAS HOJE</span>
+
+                            <b class="metric-icon amber">
+                                🚗
+                            </b>
+                        </div>
+
+                        <p id="entradasValor">--</p>
+
+                        <small>
+                            Veículos registrados hoje
+                        </small>
+
+                    </article>
+
+
+                    <!-- RECEITA -->
+
+                    <article>
+
+                        <div>
+                            <span>RECEITA HOJE</span>
+
+                            <b class="metric-icon purple">
+                                💲
+                            </b>
+                        </div>
+
+                        <p id="receitaValor">R$ 0,00</p>
+
+                        <small>
+                            Arrecadação do dia
+                        </small>
+
+                    </article>
+
+                </section>
+
+
+                <!-- GRID PRINCIPAL -->
+
+                <div class="main-grid">
+
+
+                    <!-- MAPA -->
+
+                    <section class="panel map-panel" id="mapa">
+
+                        <div class="panel-heading">
+
+                            <div>
+
+                                <h3>
+                                    Mapa de ocupação
+                                    <mark>LIVE</mark>
+                                </h3>
+
+                                <p id="mapResumo">
+                                    Monitoramento em tempo real: aguardando dados
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- LEGENDA -->
+
+                        <div class="legend">
+
+                            <span>
+                                <i class="free"></i>
+                                LIVRE
+                                <b id="livresCount">--</b>
+                            </span>
+
+                            <span>
+                                <i class="busy"></i>
+                                OCUPADA
+                                <b id="ocupadasCount">--</b>
+                            </span>
+
+                            <span>
+                                <i class="reserved"></i>
+                                RESERVADA
+                                <b id="reservadasCount">--</b>
+                            </span>
+
+                        </div>
+
+
+                        <!-- MAPA DINÂMICO -->
+
+                        <div class="parking-map">
+
+                            <div class="map-label">
+                                <span>ENTRADA PRINCIPAL</span>
+                                <span>SAÍDA</span>
+                            </div>
+
+                            <!--
+                                As vagas serão carregadas automaticamente
+                                pelo script.js através da API.
+                            -->
+
+                            <div class="spots" id="spots">
+
+                                <p>Carregando vagas...</p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- EVENTOS RECENTES -->
+
+                    <section class="panel events">
+
+                        <div class="panel-heading">
+
+                            <div>
+
+                                <h3>Sinal da operação</h3>
+
+                                <p>
+                                    Eventos mais recentes
+                                </p>
+
+                            </div>
+
+                            <span>?</span>
+
+                        </div>
+
+
+                        <!-- EVENTOS DINÂMICOS -->
+
+                        <div class="event-list" id="eventList">
+
+                            <div>
+                                <p>
+                                    <strong>
+                                        Aguardando movimentações...
+                                    </strong>
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <button class="log-button" type="button">
+                            Ver Lista Completa →
+                        </button>
+
+                    </section>
+
+                </div>
+
+
+                <!-- MOVIMENTAÇÕES -->
+
+                <section class="panel feed" id="fluxo">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>Feed de movimentações</h3>
+
+                            <p>
+                                Registro de entrada e saída · hoje
+                            </p>
+
+                        </div>
+
+                        <a href="#exportar">
+                            EXPORTAR DADOS ↗
+                        </a>
+
+                    </div>
+
+
+                    <!-- TABELA DINÂMICA -->
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>IDENTIFICADOR</th>
+                                    <th>VEÍCULO</th>
+                                    <th>HORÁRIO</th>
+                                    <th>VAGA</th>
+                                    <th>ESTADO</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="movimentacoesBody">
+
+                                <tr>
+                                    <td colspan="5">
+                                        Carregando movimentações...
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- MENSALISTAS -->
+
+                <section class="panel feed" id="mensalistas">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>Mensalistas</h3>
+
+                            <p>
+                                Área de gerenciamento de mensalistas
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <p>
+                        Módulo preparado para integração com o banco de dados.
+                    </p>
+
+                </section>
+
+
+                <!-- PREFERÊNCIAS -->
+
+                <section class="panel feed" id="preferencias">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>Preferências</h3>
+
+                            <p>
+                                Configurações do sistema PARKLY
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
